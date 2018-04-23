@@ -1,10 +1,10 @@
 var block1 = document.getElementById("blockOne");
+if (block1){
 block1.addEventListener("click", addXO);
+}
 
 var player1Points = 0;
 var player2Points = 0;
-
-
 
 function addXO() {
     document.getElementById('result').textContent = "4";
