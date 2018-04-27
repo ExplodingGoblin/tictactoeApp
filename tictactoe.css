@@ -1,7 +1,7 @@
 td {
-    width: 50px;
-    height: 50px;
-    border: solid 1px black;
+    width: 33.333%;
+    height: 40px;
+    border: solid 6px black;
     text-align: center;
     font-size: 20pt;
 }
@@ -9,4 +9,37 @@ td {
 td:hover {
     background-color: #dbdbdb;
     cursor: pointer;
+}
+
+table {
+    width: 85%;
+    border-collapse: collapse;
+}
+
+td::after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+}
+
+td {
+    border: 6px solid #222;
+}
+
+td:first-of-type {
+    border-left-color: transparent;
+    border-top-color: transparent;
+}
+
+td:nth-of-type(2) {
+    border-top-color: transparent;
+}
+
+td:nth-of-type(3) {
+    border-right-color: transparent;
+    border-top-color: transparent;
+}
+
+tr:nth-of-type(3) td {
+    border-bottom-color: transparent;
 }
