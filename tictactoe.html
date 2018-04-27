@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
     <title>Tic-Tac-Toe</title>
@@ -10,50 +10,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="tictactoe.js"></script>
-    <script src="tictactoe_Daniel.js"></script>
     <link rel="stylesheet" href="tictactoe.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Tic-Tac-Toe Game</h1>
-        <button id="startNewGame" onclick="newGame">Start New Game</button>
-        <table id="board">
-            <tr>
-                <div id="blockOne">
-                    <td></td>
-                </div>
-                <div id="blockTwo">
-                    <td></td>
-                </div>
-                <div id="blockThree">
-                    <td></td>
-                </div>
-            </tr>
-            <tr>
-                <div id="blockFour">
-                    <td></td>
-                </div>
-                <div d="blockFive">
-                    <td></td>
-                </div>
-                <div id="blockSix">
-                    <td></td>
-                </div>
-            </tr>
-            <tr>
-                <div id="blockSeven">
-                    <td></td>
-                </div>
-                <div id="blockEight">
-                    <td></td>
-                </div>
-                <div id="blockNine">
-                    <td></td>
-                </div>
-            </tr>
-        </table>
-        <div id="result"></div>
-</body>
+    <div style="text-align:center;margin:0 auto;width:50%;padding-top:20px;">
+        <br/>
+        <div style="float:left;">
+            Player 1
 
+            <div style="font-size:30pt;" id="player1">
+                0
+            </div>
+        </div>
+
+        <table id="game" style="float:left;margin-left:20px;">
+        </table>
+
+        <div style="float:left;margin-left:20px;">
+            Player 2
+            <div id="player2" style="font-size:30pt;">0</div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</body>
 </html>
