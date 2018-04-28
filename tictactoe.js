@@ -1,17 +1,17 @@
+var winArray = new Array();
 var player1Choices = new Array();
 var player2Choices = new Array();
-var numberOfPlayers = 2;
 var currentPlayer = 0;
 var turn = 0;
-var points1 = 0; // player 1 points
-var points2 = 0; // player 2 points
+var points1 = 0;
+var points2 = 0;
 var winCondition;
+var size = 3;
 
-function drawBoard() {
-    var Parent = document.getElementById("game");
-
-    while (Parent.hasChildNodes()) {
-        Parent.removeChild(Parent.firstChild);
+function createBoard() {
+    var board = document.getElementById("game");
+    while (board.hasChildNodes()) {
+        board.removeChild(board.firstChild);
     }
 
     for (r = 0; r < 3; r++) {
@@ -19,17 +19,60 @@ function drawBoard() {
 
         for (c = 0; c < 3; c++) {
             var col = document.createElement("td");
+            var addXandO = function (e) {
+                if (currentPlayer == 0) {
+                    this.innerHTML = "X";
+                    player1Choices.push(parseInt(this.id));
+                    player1Choices.sort(function (a, b) {
+                        return a - b
+                    });
+                } else {
+                    this.innerHTML = "O";
+                    player2Choices.push(parseInt(this.id));
+                    player2Choices.sort(function (a, b) {
+                        return a - b
+                    });
+                }
+
+                turn++;
+                var isWin = winner();
+
+                if (isWin) {
+                    if (currentPlayer == 0) {
+                        points1++;
+                    } else {
+                        points2++;
+                    }
+
+                    document.getElementById("player1").innerHTML = points1;
+                    document.getElementById("player2").innerHTML = points2;
+
+                    restart();
+                    createBoard();
+                } else {
+                    if (currentPlayer == 0) {
+                        currentPlayer = 1;
+                    } else {
+                        currentPlayer = 0;
+                    }
+                    this.removeEventListener('click', arguments.callee);
+                }
+            };
+
+            col.addEventListener('click', addXandO);
             row.appendChild(col);
+
         }
 
-        Parent.appendChild(row);
+        board.appendChild(row);
     }
+    winningPositions();
 }
 
-window.onload = drawBoard;
+window.onload = createBoard;
 
 
-function win() {
+function winningPositions() {
     winCondition.push([1, 2, 3]);
     winCondition.push([4, 5, 6]);
     winCondition.push([7, 8, 9]);
