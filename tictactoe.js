@@ -88,3 +88,15 @@ function restart() {
     player1Choices = new Array;
     player2Choices = new Array;
 }
+
+
+function winner() {
+    var win = false;
+    var playerChoices = new Array;
+
+    if (currentPlayer == 0) {
+        playerChoices = player1Choices;
+    } else {
+        playerChoices = player2Choices;
+    }
+}
