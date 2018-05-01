@@ -13,26 +13,29 @@
 </head>
 
 <body>
-    <div style="text-align:center;margin:0 auto;width:50%;padding-top:20px;">
-        <br/>
-        <div style="float:left;">
-            Player 1
+    <center>
+        <div style="text-align:center;margin:0 auto;width:50%;padding-top:20px;">
+            <br/>
+            <div style="float:left;">
+                <h1>X's</h1>
 
-            <div style="font-size:30pt;" id="player1">
-                0
+                <div style="font-size:30pt;" id="Xs">
+                    0
+                </div>
             </div>
+            <div style="float:left;margin-left:451px;">
+                <h1>O's</h1>
+                <div id="Os" style="font-size:30pt;">0</div>
+            </div>
+
+            <h1>
+                <table id="game" style="float:left;margin-left:20px;">
+                </table>
+            </h1>
+            <div class="clear"></div>
         </div>
-
-        <table id="game" style="float:left;margin-left:20px;">
-        </table>
-
-        <div style="float:left;margin-left:20px;">
-            Player 2
-            <div id="player2" style="font-size:30pt;">0</div>
-        </div>
-
-        <div class="clear"></div>
-    </div>
+        <button id="resetGame">Restart</button>
+    </center>
 </body>
 
 </html>

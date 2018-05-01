@@ -1,15 +1,16 @@
-var winArray = new Array();
-var player1Choices = new Array();
-var player2Choices = new Array();
-var currentPlayer = 0;
+var winCondition = new Array();
+var XsChoices = new Array();
+var OsChoices = new Array();
+var playerTurn = 0;
 var turn = 0;
 var points1 = 0;
 var points2 = 0;
-var winCondition;
 var size = 3;
 
 function createBoard() {
     var board = document.getElementById("game");
+    var number = 1;
+
     while (board.hasChildNodes()) {
         board.removeChild(board.firstChild);
     }
@@ -18,58 +19,60 @@ function createBoard() {
         var row = document.createElement("tr");
 
         for (c = 0; c < 3; c++) {
-            var col = document.createElement("td");
+            var column = document.createElement("td");
+            column.id = number;
+
             var addXandO = function (e) {
-                if (currentPlayer == 0) {
+                if (playerTurn == 0) {
                     this.innerHTML = "X";
-                    player1Choices.push(parseInt(this.id));
-                    player1Choices.sort(function (a, b) {
+                    XsChoices.push(parseInt(this.id));
+                    XsChoices.sort(function (a, b) {
                         return a - b
                     });
                 } else {
                     this.innerHTML = "O";
-                    player2Choices.push(parseInt(this.id));
-                    player2Choices.sort(function (a, b) {
+                    OsChoices.push(parseInt(this.id));
+                    OsChoices.sort(function (a, b) {
                         return a - b
                     });
                 }
 
                 turn++;
-                var isWin = winner();
+                var playerPoint = winner();
 
-                if (isWin) {
-                    if (currentPlayer == 0) {
+                if (playerPoint) {
+                    if (playerTurn == 0) {
                         points1++;
                     } else {
                         points2++;
                     }
 
-                    document.getElementById("player1").innerHTML = points1;
-                    document.getElementById("player2").innerHTML = points2;
+                    document.getElementById("Xs").innerHTML = points1;
+                    document.getElementById("Os").innerHTML = points2;
 
                     restart();
                     createBoard();
                 } else {
-                    if (currentPlayer == 0) {
-                        currentPlayer = 1;
+                    if (playerTurn == 0) {
+                        playerTurn = 1;
                     } else {
-                        currentPlayer = 0;
+                        playerTurn = 0;
                     }
                     this.removeEventListener('click', arguments.callee);
                 }
             };
 
-            col.addEventListener('click', addXandO);
-            row.appendChild(col);
+            column.addEventListener('click', addXandO);
 
+            row.appendChild(column);
+            number++;
         }
 
         board.appendChild(row);
     }
+
     winningPositions();
 }
-
-window.onload = createBoard;
 
 
 function winningPositions() {
@@ -84,19 +87,56 @@ function winningPositions() {
 }
 
 function restart() {
-    currentPlayer = 0;
-    player1Choices = new Array;
-    player2Choices = new Array;
+    playerTurn = 0;
+    XsChoices = new Array();
+    OsChoices = new Array();
 }
 
 
 function winner() {
     var win = false;
-    var playerChoices = new Array;
+    var playerChoices = new Array();
 
-    if (currentPlayer == 0) {
-        playerChoices = player1Choices;
+    if (playerTurn == 0) {
+        playerChoices = XsChoices;
     } else {
-        playerChoices = player2Choices;
+        playerChoices = OsChoices;
     }
+    if (playerChoices.length >= size) {
+
+        for (i = 0; i < winCondition.length; i++) {
+            var counting = winCondition[i];
+            var setFound = true;
+
+            for (f = 0; f < counting.length; f++) {
+                var checking = false;
+
+                for (s = 0; s < playerChoices.length; s++) {
+                    if (counting[f] == playerChoices[s]) {
+                        checking = true;
+                        break;
+                    }
+                }
+
+
+                if (checking == false) {
+                    setFound = false;
+                    break;
+                }
+            }
+
+            if (setFound == true) {
+                win = true;
+                break;
+            }
+        }
+    }
+
+    return win;
 }
+
+window.onload = createBoard;
+
+var button1 = document.getElementById("resetGame");
+button1.addEventListener('click', restart);
+button1.addEventListener('click', createBoard);
