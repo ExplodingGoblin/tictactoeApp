@@ -106,7 +106,7 @@ function winner() {
 
         for (i = 0; i < winCondition.length; i++) {
             var counting = winCondition[i];
-            var setFound = true;
+            var setCheck = true;
 
             for (f = 0; f < counting.length; f++) {
                 var checking = false;
@@ -120,12 +120,12 @@ function winner() {
 
 
                 if (checking == false) {
-                    setFound = false;
+                    setCheck = false;
                     break;
                 }
             }
 
-            if (setFound == true) {
+            if (setCheck == true) {
                 win = true;
                 break;
             }
@@ -136,7 +136,3 @@ function winner() {
 }
 
 window.onload = createBoard;
-
-var button1 = document.getElementById("resetGame");
-button1.addEventListener('click', restart);
-button1.addEventListener('click', createBoard);
